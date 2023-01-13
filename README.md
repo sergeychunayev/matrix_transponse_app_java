@@ -1,3 +1,5 @@
+[![Java CI with Gradle](https://github.com/sergeychunayev/matrix_transponse_app_java/actions/workflows/gradle.yml/badge.svg)](https://github.com/sergeychunayev/matrix_transponse_app_java/actions/workflows/gradle.yml)
+
 ### Java SpringBoot transpose matrix example.
 
 Build executable jar
