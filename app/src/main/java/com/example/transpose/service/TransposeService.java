@@ -14,8 +14,7 @@ public class TransposeService {
         final int[][] result = new int[n][m];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                final int temp = matrix[j][i];
-                result[i][j] = temp;
+                result[i][j] = matrix[j][i];
             }
         }
         return result;
