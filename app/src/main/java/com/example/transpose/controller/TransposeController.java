@@ -26,6 +26,11 @@ public class TransposeController {
     }
 
     private static Optional<ResponseEntity<Object>> validate(final int[][] matrix) {
+        return validateColNotEmpty(matrix)
+                .or(() -> validateColsSameSize(matrix));
+    }
+
+    private static Optional<ResponseEntity<Object>> validateColsSameSize(final int[][] matrix) {
         boolean sameSize = true;
         int i = 1;
         for (; i < matrix.length; i++) {
@@ -39,6 +44,25 @@ public class TransposeController {
                     ResponseEntity
                             .badRequest()
                             .body("Matrix must have same number of columns for all rows. Offending index: " + i)
+            );
+        }
+        return Optional.empty();
+    }
+
+    private static Optional<ResponseEntity<Object>> validateColNotEmpty(final int[][] matrix) {
+        boolean empty = false;
+        int i = 0;
+        for (; i < matrix.length; i++) {
+            if (matrix[i] == null || matrix[i].length == 0) {
+                empty = true;
+                break;
+            }
+        }
+        if (empty) {
+            return Optional.of(
+                    ResponseEntity
+                            .badRequest()
+                            .body("Columns must not be empty. Offending index: " + i)
             );
         }
         return Optional.empty();

@@ -26,4 +26,18 @@ class TransposeControllerTest {
         assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
         assertEquals("Matrix must have same number of columns for all rows. Offending index: 1", result.getBody());
     }
+
+    @Test
+    void transposeBadHasEmptyColNull() {
+        final ResponseEntity<Object> result = transposeController.transpose(new int[][]{{1, 2, 3}, null});
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        assertEquals("Columns must not be empty. Offending index: 1", result.getBody());
+    }
+
+    @Test
+    void transposeBadHasEmptyCol() {
+        final ResponseEntity<Object> result = transposeController.transpose(new int[][]{{1, 2, 3}, {}});
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        assertEquals("Columns must not be empty. Offending index: 1", result.getBody());
+    }
 }
